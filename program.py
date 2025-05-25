@@ -17,7 +17,7 @@ WORD_LIST = [word for word, freq in freq_dist.most_common(1000) if len(word) >= 
 
 # WORD_LIST = words.words() # the original word list contains rare uncommon words
 BLACKLIST_KEYS = ["BackSpace", "Shift_R", "Shift_L", "Return", "Left", "Right", "Up", "Down", "Meta_L", "Meta_R"]
-TIMER = 10
+TIMER = 60 # can be customised but change the calculation as well
 
 class Program:
     def __init__(self):
@@ -159,9 +159,10 @@ class Program:
             start = ranges[num]
             end = ranges[num + 1]
             correct_text = self.generated_text.get(start, end)
+            print(correct_text)
             correct_char += len(correct_text)
 
-        self.wpm_label.config(text=f"Your wpm is {correct_char // 5}")
+        self.wpm_label.config(text=f"Your wpm is {round((correct_char / 5) * (60 / TIMER))}")
 
 
     def restart(self):
